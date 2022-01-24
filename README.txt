@@ -193,3 +193,6 @@ npm install
 
 # Instalamos librería para encriptado
 npm install bcrypt
+
+# Instalamos el paquete passport para el login
+npm install passport passport-local
