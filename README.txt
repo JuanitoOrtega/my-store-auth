@@ -190,3 +190,6 @@ heroku run npm run migrations:delete
 :::::::::::::::::::::::::::::::::::::
 # Instalamos dependencias
 npm install
+
+# Instalamos librería para encriptado
+npm install bcrypt
