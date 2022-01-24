@@ -199,3 +199,6 @@ npm install passport passport-local
 
 # Instalamos librería JWT
 npm install jsonwebtoken
+
+# Instalamos librería passport-jwt para proteger las rutas
+npm install passport-jwt
