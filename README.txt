@@ -196,3 +196,6 @@ npm install bcrypt
 
 # Instalamos el paquete passport para el login
 npm install passport passport-local
+
+# Instalamos librería JWT
+npm install jsonwebtoken
