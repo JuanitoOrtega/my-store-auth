@@ -33,11 +33,26 @@ class AuthService {
         };
     }
 
-    async sendMail(email) {
+    async sendRecovery(email) {
         const user = await service.findByEmail(email);
         if (!user) {
             throw boom.unauthorized('Invalid email');
         }
+        const payload = { sub: user.id };
+        const token = jwt.sign(payload, config.jwtSecret, { expiresIn: '1h' });
+        const link = `https://myfrontend.com/password_recovery?token=${token}`;
+        await service.update(user.id, {recoveryToken: token});
+        const mail = {
+            from: `"Juanito Ortega 👻" <${config.emailSender}>`, // sender address
+            to: `${user.email}`, // list of receivers
+            subject: "Restablecer contraseña ✔", // Subject line
+            html: `<b>Para restablecer tu contraseña, ingresa a este enlace: ${link}</b>`, // html body
+        }
+        const rta = await this.sendMail(mail);
+        return rta;
+    }
+
+    async sendMail(infoMail) {
         const transporter = nodemailer.createTransport({
             host: "smtp.gmail.com",
             secure: true, // true for 465, false for other ports
@@ -47,13 +62,7 @@ class AuthService {
                 pass: config.emailPassword
             }
         });
-        await transporter.sendMail({
-            from: '"Juanito Ortega 👻" <ortegaj83@gmail.com>', // sender address
-            to: `${user.email}`, // list of receivers
-            subject: "Hola ✔", // Subject line
-            text: "Hello world?", // plain text body
-            html: "<b>Hello world?</b>", // html body
-        });
+        await transporter.sendMail(infoMail);
         return { message: 'Mail sent' };
     }
 }

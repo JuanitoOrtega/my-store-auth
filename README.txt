@@ -206,3 +206,9 @@ npm install passport-jwt
 /// ENVIOS DE CORREO
 # Instalamos librería nodemailer
 npm install nodemailer
+
+# Creamos un nuevo archivo de migración
+npm run migrations:generate recovery-token-field
+
+# Volvemos a inyectar la migración
+npm run migrations:run
