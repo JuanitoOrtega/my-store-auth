@@ -190,3 +190,25 @@ heroku run npm run migrations:delete
 :::::::::::::::::::::::::::::::::::::
 # Instalamos dependencias
 npm install
+
+# Instalamos librería para encriptado
+npm install bcrypt
+
+# Instalamos el paquete passport para el login
+npm install passport passport-local
+
+# Instalamos librería JWT
+npm install jsonwebtoken
+
+# Instalamos librería passport-jwt para proteger las rutas
+npm install passport-jwt
+
+/// ENVIOS DE CORREO
+# Instalamos librería nodemailer
+npm install nodemailer
+
+# Creamos un nuevo archivo de migración
+npm run migrations:generate recovery-token-field
+
+# Volvemos a inyectar la migración
+npm run migrations:run

@@ -11,10 +11,17 @@ class UserService {
   }
 
   async find() {
-    const rta = await models.User.findAll({
+    const res = await models.User.findAll({
       include: ['customer']
     });
-    return rta;
+    return res;
+  }
+
+  async findByEmail(email) {
+    const res = await models.User.findOne({
+      where: { email }
+    });
+    return res;
   }
 
   async findOne(id) {
