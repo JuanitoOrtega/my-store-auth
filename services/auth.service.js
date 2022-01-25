@@ -52,6 +52,21 @@ class AuthService {
         return rta;
     }
 
+    async changePassword(token, newPassword) {
+        try {
+            const payload = jwt.verify(token, config.jwtSecret);
+            const user = await service.findOne(payload.sub);
+            if (user.recoveryToken !== token) {
+                throw boom.unauthorized('Invalid token');
+            }
+            const hash = await bcrypt.hash(newPassword, 10);
+            await service.update(user.id, { password: hash, recoveryToken: null });
+            return { message: 'Password changed' };
+        } catch (error) {
+            throw boom.unauthorized('Invalid or expired token');
+        }
+    }
+
     async sendMail(infoMail) {
         const transporter = nodemailer.createTransport({
             host: "smtp.gmail.com",
