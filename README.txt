@@ -202,3 +202,7 @@ npm install jsonwebtoken
 
 # Instalamos librería passport-jwt para proteger las rutas
 npm install passport-jwt
+
+/// ENVIOS DE CORREO
+# Instalamos librería nodemailer
+npm install nodemailer
