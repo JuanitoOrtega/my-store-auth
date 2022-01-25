@@ -212,3 +212,15 @@ npm run migrations:generate recovery-token-field
 
 # Volvemos a inyectar la migración
 npm run migrations:run
+
+# Eliminamos las migraciones anteriores en heroku
+heroku run npm run migrations:delete
+
+# Configurar las variables de entorno en heroku desde la consola
+heroku config:set API_KEY=1234567890 JWT_SECRET=WdlTzRxPbpaghDtvFjQ6AKs24HYEyJZo EMAIL_SENDER=ortegaj83@gmail.com EMAIL_PASSWORD=wpgghzyefjebogrq
+
+# Deploy a heroku
+git push heroku production:master
+
+# Volvemos a inyectar la migración en heroku
+heroku run npm run migrations:run
